@@ -62,6 +62,26 @@ namespace SolastaFaceUnlock
             return true;
         }
 
+        public class BaldieBuilder : BaseDefinitionBuilder<MorphotypeElementDefinition>
+        {
+            protected BaldieBuilder(string name, string guid, string title_string, string description_string) : base(name, guid)
+            {
+                if (title_string != "")
+                {
+                    Definition.GuiPresentation.Title = title_string;
+                }
+                if (description_string != "")
+                {
+                    Definition.GuiPresentation.Description = description_string;
+                }
+            }
+
+            public static MorphotypeElementDefinition createMorphotype(string name, string guid, string title_string, string description_string)
+            {
+                return new BaldieBuilder(name, guid, title_string, description_string).AddToDB();
+            }
+        }
+
     internal static void OnGameReady()
         {
             string[] originallowed = new string[] { "Origin_NonHuman" };
@@ -224,6 +244,10 @@ namespace SolastaFaceUnlock
 
             CharacterRaceDefinition humanity = DatabaseHelper.CharacterRaceDefinitions.Human;
             CharacterRaceDefinition halfelfkind = DatabaseHelper.CharacterRaceDefinitions.HalfElf;
+            CharacterRaceDefinition dwarfkind = DatabaseHelper.CharacterRaceDefinitions.Dwarf;
+            CharacterRaceDefinition halflingses = DatabaseHelper.CharacterRaceDefinitions.Halfling;
+            CharacterRaceDefinition elfkind = DatabaseHelper.CharacterRaceDefinitions.Elf;
+
 
             halfelfkind.RacePresentation.MaleFaceShapeOptions.Add("FaceShape_HalfElf_NPC_Bartender");
             humanity.RacePresentation.FemaleFaceShapeOptions.Add("FaceShape_NPC_Heather_Merran");
@@ -248,6 +272,20 @@ namespace SolastaFaceUnlock
             face_to_unlock54.SetPlayerSelectable(true);
             face_to_unlock55.SetPlayerSelectable(true);
             face_to_unlock56.SetPlayerSelectable(true);
+
+            MorphotypeElementDefinition hair_shape_kojak = BaldieBuilder.createMorphotype("HairShape_Kojak", "0e4f7928-689a-4b0c-8561-066b1cbe0938", "", "");
+
+            dwarfkind.RacePresentation.MaleHairShapeOptions.Add("HairShape_Kojak");
+            dwarfkind.RacePresentation.FemaleHairShapeOptions.Add("HairShape_Kojak");
+            humanity.RacePresentation.MaleHairShapeOptions.Add("HairShape_Kojak");
+            humanity.RacePresentation.FemaleHairShapeOptions.Add("HairShape_Kojak");
+            halfelfkind.RacePresentation.MaleHairShapeOptions.Add("HairShape_Kojak");
+            halfelfkind.RacePresentation.FemaleHairShapeOptions.Add("HairShape_Kojak");
+            halflingses.RacePresentation.MaleHairShapeOptions.Add("HairShape_Kojak");
+            halflingses.RacePresentation.FemaleHairShapeOptions.Add("HairShape_Kojak");
+            elfkind.RacePresentation.MaleHairShapeOptions.Add("HairShape_Kojak");
+            elfkind.RacePresentation.FemaleHairShapeOptions.Add("HairShape_Kojak");
+
 
         }
     }

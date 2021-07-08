@@ -1,6 +1,10 @@
 # SolastaFaceUnlock
 
 This mod unlocks 56 NPC faces and makes them available for character creation. Finally, you can look just like NPC_TavernGuy!
+Disclaimer: Some faces may not work with all bear shapes!
+
+V0.0.2: Added Bald option for males and females of all races.
+
 (Note: All of the unlocked Human faces are available under all origins because I am too lazy to sort them out.)
 
 # How to Compile
