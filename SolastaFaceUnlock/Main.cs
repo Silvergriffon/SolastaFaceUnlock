@@ -86,6 +86,7 @@ namespace SolastaFaceUnlock
         {
             string[] originallowed = new string[] { "Origin_NonHuman" };
             string[] humanorigin = new string[] { "Origin_CA", "Origin_AS", "Origin_AF" };
+            string[] all_origins = new string[] { "Origin_NonHuman", "Origin_CA", "Origin_AS", "Origin_AF" };
             MorphotypeElementDefinition face_to_unlock = DatabaseHelper.MorphotypeElementDefinitions.FaceShape_NPC_Priest_of_Arun;
             MorphotypeElementDefinition face_to_unlock2 = DatabaseHelper.MorphotypeElementDefinitions.FaceShape_NPC_Ceannard;
             MorphotypeElementDefinition face_to_unlock3 = DatabaseHelper.MorphotypeElementDefinitions.FaceShape_NPC_Galar_Goldentongue;
@@ -137,7 +138,6 @@ namespace SolastaFaceUnlock
             MorphotypeElementDefinition face_to_unlock49 = DatabaseHelper.MorphotypeElementDefinitions.FaceShape_NPC_Atima_Bladeburn;
             MorphotypeElementDefinition face_to_unlock50 = DatabaseHelper.MorphotypeElementDefinitions.FaceShape_NPC_Lisbath_Townsend;
             MorphotypeElementDefinition face_to_unlock51 = DatabaseHelper.MorphotypeElementDefinitions.FaceShape_NPC_Priestess_of_Pakri;
-
             face_to_unlock.SetOriginAllowed(originallowed);
             face_to_unlock2.SetOriginAllowed(originallowed);
             face_to_unlock3.SetOriginAllowed(originallowed);
@@ -189,7 +189,6 @@ namespace SolastaFaceUnlock
             face_to_unlock49.SetOriginAllowed(humanorigin);
             face_to_unlock50.SetOriginAllowed(humanorigin);
             face_to_unlock51.SetOriginAllowed(humanorigin);
-
             face_to_unlock.SetPlayerSelectable(true);
             face_to_unlock2.SetPlayerSelectable(true);
             face_to_unlock3.SetPlayerSelectable(true);
@@ -206,7 +205,7 @@ namespace SolastaFaceUnlock
             face_to_unlock14.SetPlayerSelectable(true);
             face_to_unlock15.SetPlayerSelectable(true);
             face_to_unlock16.SetPlayerSelectable(true);
-            face_to_unlock17.SetPlayerSelectable(true);
+//            face_to_unlock17.SetPlayerSelectable(true);
             face_to_unlock18.SetPlayerSelectable(true);
             face_to_unlock19.SetPlayerSelectable(true);
             face_to_unlock20.SetPlayerSelectable(true);
@@ -247,26 +246,21 @@ namespace SolastaFaceUnlock
             CharacterRaceDefinition dwarfkind = DatabaseHelper.CharacterRaceDefinitions.Dwarf;
             CharacterRaceDefinition halflingses = DatabaseHelper.CharacterRaceDefinitions.Halfling;
             CharacterRaceDefinition elfkind = DatabaseHelper.CharacterRaceDefinitions.Elf;
-
-
             halfelfkind.RacePresentation.MaleFaceShapeOptions.Add("FaceShape_HalfElf_NPC_Bartender");
             humanity.RacePresentation.FemaleFaceShapeOptions.Add("FaceShape_NPC_Heather_Merran");
             halfelfkind.RacePresentation.FemaleFaceShapeOptions.Add("FaceShape_NPC_Princess");
             humanity.RacePresentation.MaleFaceShapeOptions.Add("FaceShape_NPC_TavernGuy");
             humanity.RacePresentation.MaleFaceShapeOptions.Add("FaceShape_NPC_TomWorker");
-
             MorphotypeElementDefinition face_to_unlock52 = DatabaseHelper.MorphotypeElementDefinitions.FaceShape_HalfElf_NPC_Bartender;
             MorphotypeElementDefinition face_to_unlock53 = DatabaseHelper.MorphotypeElementDefinitions.FaceShape_NPC_Heather_Merran;
             MorphotypeElementDefinition face_to_unlock54 = DatabaseHelper.MorphotypeElementDefinitions.FaceShape_NPC_Princess;
             MorphotypeElementDefinition face_to_unlock55 = DatabaseHelper.MorphotypeElementDefinitions.FaceShape_NPC_TavernGuy;
             MorphotypeElementDefinition face_to_unlock56 = DatabaseHelper.MorphotypeElementDefinitions.FaceShape_NPC_TomWorker;
-
             face_to_unlock52.SetOriginAllowed(originallowed);
             face_to_unlock53.SetOriginAllowed(humanorigin);
             face_to_unlock54.SetOriginAllowed(originallowed);
             face_to_unlock55.SetOriginAllowed(humanorigin);
             face_to_unlock56.SetOriginAllowed(humanorigin);
-
             face_to_unlock52.SetPlayerSelectable(true);
             face_to_unlock53.SetPlayerSelectable(true);
             face_to_unlock54.SetPlayerSelectable(true);
@@ -274,7 +268,6 @@ namespace SolastaFaceUnlock
             face_to_unlock56.SetPlayerSelectable(true);
 
             MorphotypeElementDefinition hair_shape_kojak = BaldieBuilder.createMorphotype("HairShape_Kojak", "0e4f7928-689a-4b0c-8561-066b1cbe0938", "", "");
-
             dwarfkind.RacePresentation.MaleHairShapeOptions.Add("HairShape_Kojak");
             dwarfkind.RacePresentation.FemaleHairShapeOptions.Add("HairShape_Kojak");
             humanity.RacePresentation.MaleHairShapeOptions.Add("HairShape_Kojak");
@@ -285,6 +278,20 @@ namespace SolastaFaceUnlock
             halflingses.RacePresentation.FemaleHairShapeOptions.Add("HairShape_Kojak");
             elfkind.RacePresentation.MaleHairShapeOptions.Add("HairShape_Kojak");
             elfkind.RacePresentation.FemaleHairShapeOptions.Add("HairShape_Kojak");
+
+            MorphotypeElementDefinition skin_to_unlock = DatabaseHelper.MorphotypeElementDefinitions.FaceAndSkin_Defiler;
+            skin_to_unlock.SetOriginAllowed(all_origins);
+            skin_to_unlock.SetPlayerSelectable(true);
+
+            MorphotypeElementDefinition eyes_to_unlock = DatabaseHelper.MorphotypeElementDefinitions.EyeColorDefiler;
+            MorphotypeElementDefinition eyes_to_unlock2 = DatabaseHelper.MorphotypeElementDefinitions.EyeColorInfiltrator;
+            MorphotypeElementDefinition eyes_to_unlock3 = DatabaseHelper.MorphotypeElementDefinitions.EyeColorNecromancer;
+            eyes_to_unlock.SetOriginAllowed(all_origins);
+            eyes_to_unlock2.SetOriginAllowed(all_origins);
+            eyes_to_unlock3.SetOriginAllowed(all_origins);
+            eyes_to_unlock.SetPlayerSelectable(true);
+            eyes_to_unlock2.SetPlayerSelectable(true);
+            eyes_to_unlock3.SetPlayerSelectable(true);
 
 
         }
