@@ -205,7 +205,7 @@ namespace SolastaFaceUnlock
             face_to_unlock14.SetPlayerSelectable(true);
             face_to_unlock15.SetPlayerSelectable(true);
             face_to_unlock16.SetPlayerSelectable(true);
-//            face_to_unlock17.SetPlayerSelectable(true);
+//            face_to_unlock17.SetPlayerSelectable(true) - causes failure to load into game
             face_to_unlock18.SetPlayerSelectable(true);
             face_to_unlock19.SetPlayerSelectable(true);
             face_to_unlock20.SetPlayerSelectable(true);
@@ -266,18 +266,6 @@ namespace SolastaFaceUnlock
             face_to_unlock54.SetPlayerSelectable(true);
             face_to_unlock55.SetPlayerSelectable(true);
             face_to_unlock56.SetPlayerSelectable(true);
-
-            MorphotypeElementDefinition hair_shape_kojak = BaldieBuilder.createMorphotype("HairShape_Kojak", "0e4f7928-689a-4b0c-8561-066b1cbe0938", "", "");
-            dwarfkind.RacePresentation.MaleHairShapeOptions.Add("HairShape_Kojak");
-            dwarfkind.RacePresentation.FemaleHairShapeOptions.Add("HairShape_Kojak");
-            humanity.RacePresentation.MaleHairShapeOptions.Add("HairShape_Kojak");
-            humanity.RacePresentation.FemaleHairShapeOptions.Add("HairShape_Kojak");
-            halfelfkind.RacePresentation.MaleHairShapeOptions.Add("HairShape_Kojak");
-            halfelfkind.RacePresentation.FemaleHairShapeOptions.Add("HairShape_Kojak");
-            halflingses.RacePresentation.MaleHairShapeOptions.Add("HairShape_Kojak");
-            halflingses.RacePresentation.FemaleHairShapeOptions.Add("HairShape_Kojak");
-            elfkind.RacePresentation.MaleHairShapeOptions.Add("HairShape_Kojak");
-            elfkind.RacePresentation.FemaleHairShapeOptions.Add("HairShape_Kojak");
 
             MorphotypeElementDefinition skin_to_unlock = DatabaseHelper.MorphotypeElementDefinitions.FaceAndSkin_Defiler;
             skin_to_unlock.SetOriginAllowed(all_origins);
