@@ -2,7 +2,7 @@
 	"Id": "SolastaFaceUnlock",
 	"DisplayName": "SolastaFaceUnlock",
 	"Author": "Silvergriffon",
-	"Version": "0.0.5",
+	"Version": "0.0.6",
 	"ManagerVersion": "0.23.4",
 	"Requirements": [ "SolastaModApi" ],
 	"LoadAfter": [ "SolastaModApi" ],

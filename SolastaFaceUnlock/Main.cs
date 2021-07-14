@@ -82,6 +82,7 @@ namespace SolastaFaceUnlock
             }
         }
 
+
     internal static void OnGameReady()
         {
             string[] originallowed = new string[] { "Origin_NonHuman" };
@@ -280,6 +281,25 @@ namespace SolastaFaceUnlock
             eyes_to_unlock.SetPlayerSelectable(true);
             eyes_to_unlock2.SetPlayerSelectable(true);
             eyes_to_unlock3.SetPlayerSelectable(true);
+
+            void ToggleSorcererBodyDecorations()
+            {
+                CharacterSubclassDefinition sorcerer_draconic = DatabaseHelper.CharacterSubclassDefinitions.SorcerousDraconicBloodline;
+                CharacterSubclassDefinition sorcerer_mana_painter = DatabaseHelper.CharacterSubclassDefinitions.SorcerousManaPainter;
+                CharacterSubclassDefinition sorcerer_child_of_rift = DatabaseHelper.CharacterSubclassDefinitions.SorcerousChildRift;
+
+                if (!Main.Settings.toggleBodyDec)
+                {
+                    return;
+                }
+
+                sorcerer_draconic.SetMorphotypeSubclassFilterTag(GraphicsDefinitions.MorphotypeSubclassFilterTag.Default);
+                sorcerer_mana_painter.SetMorphotypeSubclassFilterTag(GraphicsDefinitions.MorphotypeSubclassFilterTag.Default);
+                sorcerer_child_of_rift.SetMorphotypeSubclassFilterTag(GraphicsDefinitions.MorphotypeSubclassFilterTag.Default);
+
+            }
+
+            ToggleSorcererBodyDecorations();
 
 
         }
