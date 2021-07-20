@@ -62,27 +62,6 @@ namespace SolastaFaceUnlock
             return true;
         }
 
-        public class BaldieBuilder : BaseDefinitionBuilder<MorphotypeElementDefinition>
-        {
-            protected BaldieBuilder(string name, string guid, string title_string, string description_string) : base(name, guid)
-            {
-                if (title_string != "")
-                {
-                    Definition.GuiPresentation.Title = title_string;
-                }
-                if (description_string != "")
-                {
-                    Definition.GuiPresentation.Description = description_string;
-                }
-            }
-
-            public static MorphotypeElementDefinition createMorphotype(string name, string guid, string title_string, string description_string)
-            {
-                return new BaldieBuilder(name, guid, title_string, description_string).AddToDB();
-            }
-        }
-
-
     internal static void OnGameReady()
         {
             string[] originallowed = new string[] { "Origin_NonHuman" };
@@ -282,24 +261,53 @@ namespace SolastaFaceUnlock
             eyes_to_unlock2.SetPlayerSelectable(true);
             eyes_to_unlock3.SetPlayerSelectable(true);
 
-            void ToggleSorcererBodyDecorations()
-            {
-                CharacterSubclassDefinition sorcerer_draconic = DatabaseHelper.CharacterSubclassDefinitions.SorcerousDraconicBloodline;
-                CharacterSubclassDefinition sorcerer_mana_painter = DatabaseHelper.CharacterSubclassDefinitions.SorcerousManaPainter;
-                CharacterSubclassDefinition sorcerer_child_of_rift = DatabaseHelper.CharacterSubclassDefinitions.SorcerousChildRift;
+            MorphotypeElementDefinition draconic_skin = DatabaseHelper.MorphotypeElementDefinitions.BodyDecoration_SorcererDraconic;
+            draconic_skin.SetSubClassFilterMask(GraphicsDefinitions.MorphotypeSubclassFilterTag.All);
+            MorphotypeElementDefinition mana_painter_skin = DatabaseHelper.MorphotypeElementDefinitions.BodyDecoration_SorcererManaPainter;
+            mana_painter_skin.SetSubClassFilterMask(GraphicsDefinitions.MorphotypeSubclassFilterTag.All);
+            MorphotypeElementDefinition child_of_rift_skin = DatabaseHelper.MorphotypeElementDefinitions.BodyDecoration_SorcererChildOfTheRift;
+            child_of_rift_skin.SetSubClassFilterMask(GraphicsDefinitions.MorphotypeSubclassFilterTag.All);
 
-                if (!Main.Settings.toggleBodyDec)
-                {
-                    return;
-                }
+            MorphotypeElementDefinition mana_painter_color_00 = DatabaseHelper.MorphotypeElementDefinitions.BodyDecorationColor_SorcererManaPainter_00;
+            mana_painter_color_00.SetSubClassFilterMask(GraphicsDefinitions.MorphotypeSubclassFilterTag.All);
+            MorphotypeElementDefinition mana_painter_color_01 = DatabaseHelper.MorphotypeElementDefinitions.BodyDecorationColor_SorcererManaPainter_01;
+            mana_painter_color_01.SetSubClassFilterMask(GraphicsDefinitions.MorphotypeSubclassFilterTag.All);
+            MorphotypeElementDefinition mana_painter_color_02 = DatabaseHelper.MorphotypeElementDefinitions.BodyDecorationColor_SorcererManaPainter_02;
+            mana_painter_color_02.SetSubClassFilterMask(GraphicsDefinitions.MorphotypeSubclassFilterTag.All);
+            MorphotypeElementDefinition mana_painter_color_03 = DatabaseHelper.MorphotypeElementDefinitions.BodyDecorationColor_SorcererManaPainter_03;
+            mana_painter_color_03.SetSubClassFilterMask(GraphicsDefinitions.MorphotypeSubclassFilterTag.All);
+            MorphotypeElementDefinition mana_painter_color_04 = DatabaseHelper.MorphotypeElementDefinitions.BodyDecorationColor_SorcererManaPainter_04;
+            mana_painter_color_04.SetSubClassFilterMask(GraphicsDefinitions.MorphotypeSubclassFilterTag.All);
+            MorphotypeElementDefinition mana_painter_color_05 = DatabaseHelper.MorphotypeElementDefinitions.BodyDecorationColor_SorcererManaPainter_05;
+            mana_painter_color_05.SetSubClassFilterMask(GraphicsDefinitions.MorphotypeSubclassFilterTag.All);
+            MorphotypeElementDefinition mana_painter_color_06 = DatabaseHelper.MorphotypeElementDefinitions.BodyDecorationColor_SorcererManaPainter_06;
+            mana_painter_color_06.SetSubClassFilterMask(GraphicsDefinitions.MorphotypeSubclassFilterTag.All);
+            MorphotypeElementDefinition mana_painter_color_07 = DatabaseHelper.MorphotypeElementDefinitions.BodyDecorationColor_SorcererManaPainter_07;
+            mana_painter_color_07.SetSubClassFilterMask(GraphicsDefinitions.MorphotypeSubclassFilterTag.All);
+            MorphotypeElementDefinition mana_painter_color_08 = DatabaseHelper.MorphotypeElementDefinitions.BodyDecorationColor_SorcererManaPainter_08;
+            mana_painter_color_08.SetSubClassFilterMask(GraphicsDefinitions.MorphotypeSubclassFilterTag.All);
+            MorphotypeElementDefinition mana_painter_color_09 = DatabaseHelper.MorphotypeElementDefinitions.BodyDecorationColor_SorcererManaPainter_09;
+            mana_painter_color_09.SetSubClassFilterMask(GraphicsDefinitions.MorphotypeSubclassFilterTag.All);
+            MorphotypeElementDefinition mana_painter_color_10 = DatabaseHelper.MorphotypeElementDefinitions.BodyDecorationColor_SorcererManaPainter_10;
+            mana_painter_color_10.SetSubClassFilterMask(GraphicsDefinitions.MorphotypeSubclassFilterTag.All);
+            MorphotypeElementDefinition mana_painter_color_11 = DatabaseHelper.MorphotypeElementDefinitions.BodyDecorationColor_SorcererManaPainter_11;
+            mana_painter_color_11.SetSubClassFilterMask(GraphicsDefinitions.MorphotypeSubclassFilterTag.All);
+            MorphotypeElementDefinition mana_painter_color_12 = DatabaseHelper.MorphotypeElementDefinitions.BodyDecorationColor_SorcererManaPainter_12;
+            mana_painter_color_12.SetSubClassFilterMask(GraphicsDefinitions.MorphotypeSubclassFilterTag.All);
+            MorphotypeElementDefinition mana_painter_color_13 = DatabaseHelper.MorphotypeElementDefinitions.BodyDecorationColor_SorcererManaPainter_13;
+            mana_painter_color_13.SetSubClassFilterMask(GraphicsDefinitions.MorphotypeSubclassFilterTag.All);
+            MorphotypeElementDefinition mana_painter_color_14 = DatabaseHelper.MorphotypeElementDefinitions.BodyDecorationColor_SorcererManaPainter_14;
+            mana_painter_color_14.SetSubClassFilterMask(GraphicsDefinitions.MorphotypeSubclassFilterTag.All);
+            MorphotypeElementDefinition mana_painter_color_15 = DatabaseHelper.MorphotypeElementDefinitions.BodyDecorationColor_SorcererManaPainter_15;
+            mana_painter_color_15.SetSubClassFilterMask(GraphicsDefinitions.MorphotypeSubclassFilterTag.All);
 
-                sorcerer_draconic.SetMorphotypeSubclassFilterTag(GraphicsDefinitions.MorphotypeSubclassFilterTag.Default);
-                sorcerer_mana_painter.SetMorphotypeSubclassFilterTag(GraphicsDefinitions.MorphotypeSubclassFilterTag.Default);
-                sorcerer_child_of_rift.SetMorphotypeSubclassFilterTag(GraphicsDefinitions.MorphotypeSubclassFilterTag.Default);
+            CharacterSubclassDefinition sorcerer_draconic = DatabaseHelper.CharacterSubclassDefinitions.SorcerousDraconicBloodline;
+            CharacterSubclassDefinition sorcerer_mana_painter = DatabaseHelper.CharacterSubclassDefinitions.SorcerousManaPainter;
+            CharacterSubclassDefinition sorcerer_child_of_rift = DatabaseHelper.CharacterSubclassDefinitions.SorcerousChildRift;
 
-            }
-
-            ToggleSorcererBodyDecorations();
+            sorcerer_draconic.SetMorphotypeSubclassFilterTag(GraphicsDefinitions.MorphotypeSubclassFilterTag.Default);
+            sorcerer_mana_painter.SetMorphotypeSubclassFilterTag(GraphicsDefinitions.MorphotypeSubclassFilterTag.Default);
+            sorcerer_child_of_rift.SetMorphotypeSubclassFilterTag(GraphicsDefinitions.MorphotypeSubclassFilterTag.Default);
 
 
         }

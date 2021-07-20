@@ -9,7 +9,7 @@ namespace SolastaFaceUnlock
 
     public class Settings : UnityModManager.ModSettings
     {
-        public bool toggleBodyDec = false;
+     //   public bool toggleBodyDec = false;
      //   public bool toggleTest2 = true;
 
     }
