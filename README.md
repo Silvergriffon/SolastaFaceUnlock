@@ -1,19 +1,14 @@
 # SolastaFaceUnlock
 
 This mod unlocks 55 NPC faces and makes them available for character creation. Finally, you can look just like NPC_TavernGuy!
-Disclaimer: Some faces may not work with all bear shapes!
-Note: All of the unlocked Human faces are available under all origins.
 
-V0.0.2: Added Bald option for males and females of all races.
+Also unlocks 1 new skin color and 3 different glowing eyes.
 
-V0.0.3: Unlocked 1 new Skin/Face color.
-		Unlocked 3 glowing eye colors. The swatches do not properly reflect their color, so click on them to see. They are the three on the bottom row.
-		
-V0.0.4: Removed bugged skin "FaceShape_NPC_Idriel_Fair_Brow", updated description to 55 faces.
+As of version 0.1.0, this mod now unlocks Sorcerer body decorations for all character classes, and allows all Sorcerer origins to choose any of them (or none). Includes glowing body decoration color options.
 
-V0.0.5: Removed bald hairstyle as it has been officially added to the game as of 1.1.16(Sorcerer Update).
+Disclaimer: Some faces may not work with all beard shapes!
 
-V0.0.6: Added a setting to toggle Sorcerer origin body decorations.
+KNOWN ISSUE: The female vampire face will cause your character to float instead of walk. This also messes with the main hand weapon attachment point as your hands are in a position that is not conducive to holding most items.
 
 # How to Compile
 
