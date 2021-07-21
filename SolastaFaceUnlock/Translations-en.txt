@@ -1,2 +1,2 @@
-SolastaFaceUnlock/&NothingToSeeHere	Nothing to translate
+Stage/&IdentityMorphotypeEyeHeader	Eye Style
 

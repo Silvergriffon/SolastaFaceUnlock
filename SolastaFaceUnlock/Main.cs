@@ -110,7 +110,7 @@ namespace SolastaFaceUnlock
             MorphotypeElementDefinition face_to_unlock41 = DatabaseHelper.MorphotypeElementDefinitions.FaceShape_NPC_Razan_Holarant;
             MorphotypeElementDefinition face_to_unlock42 = DatabaseHelper.MorphotypeElementDefinitions.FaceShape_NPC_Talbut_the_Grey;
             MorphotypeElementDefinition face_to_unlock43 = DatabaseHelper.MorphotypeElementDefinitions.FaceShape_NPC_Ron;
-            MorphotypeElementDefinition face_to_unlock44 = DatabaseHelper.MorphotypeElementDefinitions.FaceShape_NPC_Aksha;
+//            MorphotypeElementDefinition face_to_unlock44 = DatabaseHelper.MorphotypeElementDefinitions.FaceShape_NPC_Aksha;
             MorphotypeElementDefinition face_to_unlock45 = DatabaseHelper.MorphotypeElementDefinitions.FaceShape_NPC_Morgan;
             MorphotypeElementDefinition face_to_unlock46 = DatabaseHelper.MorphotypeElementDefinitions.FaceShape_NPC_Leira_Kean;
             MorphotypeElementDefinition face_to_unlock47 = DatabaseHelper.MorphotypeElementDefinitions.FaceShape_NPC_Lena;
@@ -161,7 +161,7 @@ namespace SolastaFaceUnlock
             face_to_unlock41.SetOriginAllowed(humanorigin);
             face_to_unlock42.SetOriginAllowed(humanorigin);
             face_to_unlock43.SetOriginAllowed(humanorigin);
-            face_to_unlock44.SetOriginAllowed(humanorigin);
+//            face_to_unlock44.SetOriginAllowed(humanorigin);
             face_to_unlock45.SetOriginAllowed(humanorigin);
             face_to_unlock46.SetOriginAllowed(humanorigin);
             face_to_unlock47.SetOriginAllowed(humanorigin);
@@ -212,7 +212,7 @@ namespace SolastaFaceUnlock
             face_to_unlock41.SetPlayerSelectable(true);
             face_to_unlock42.SetPlayerSelectable(true);
             face_to_unlock43.SetPlayerSelectable(true);
-            face_to_unlock44.SetPlayerSelectable(true);
+//            face_to_unlock44.SetPlayerSelectable(true); - causes model to float and replaces attack animations
             face_to_unlock45.SetPlayerSelectable(true);
             face_to_unlock46.SetPlayerSelectable(true);
             face_to_unlock47.SetPlayerSelectable(true);
@@ -308,6 +308,13 @@ namespace SolastaFaceUnlock
             sorcerer_draconic.SetMorphotypeSubclassFilterTag(GraphicsDefinitions.MorphotypeSubclassFilterTag.Default);
             sorcerer_mana_painter.SetMorphotypeSubclassFilterTag(GraphicsDefinitions.MorphotypeSubclassFilterTag.Default);
             sorcerer_child_of_rift.SetMorphotypeSubclassFilterTag(GraphicsDefinitions.MorphotypeSubclassFilterTag.Default);
+
+            MorphotypeElementDefinition draconic_eyes = DatabaseHelper.MorphotypeElementDefinitions.Eye_SorcererDraconic;
+            draconic_eyes.SetSubClassFilterMask(GraphicsDefinitions.MorphotypeSubclassFilterTag.All);
+            MorphotypeElementDefinition mana_painter_eyes = DatabaseHelper.MorphotypeElementDefinitions.Eye_SorcererManaPainter;
+            mana_painter_eyes.SetSubClassFilterMask(GraphicsDefinitions.MorphotypeSubclassFilterTag.All);
+            MorphotypeElementDefinition childofrift_eyes = DatabaseHelper.MorphotypeElementDefinitions.Eye_SorcererChildOfTheRift;
+            childofrift_eyes.SetSubClassFilterMask(GraphicsDefinitions.MorphotypeSubclassFilterTag.All);
 
 
         }
