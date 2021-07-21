@@ -1,14 +1,21 @@
 # SolastaFaceUnlock
 
-This mod unlocks 55 NPC faces and makes them available for character creation. Finally, you can look just like NPC_TavernGuy!
+This mod unlocks the following and makes them available for character creation:
 
-Also unlocks 1 new skin color and 3 different glowing eyes.
+54 NPC faces
 
-As of version 0.1.0, this mod now unlocks Sorcerer body decorations for all character classes, and allows all Sorcerer origins to choose any of them (or none). Includes glowing body decoration color options.
+1 New skin color
+
+3 Different glowing eye colors
+
+4 "Eye Styles" (new category with default plus 3 eye models from the Sorcerer update)
+
+3 Body Decorations (Sorcerer body decorations now for all character classes)
+
+16 Glowing Body decoration color options
 
 Disclaimer: Some faces may not work with all beard shapes!
 
-KNOWN ISSUE: The female vampire face will cause your character to float instead of walk. This also messes with the main hand weapon attachment point as your hands are in a position that is not conducive to holding most items.
 
 # How to Compile
 
