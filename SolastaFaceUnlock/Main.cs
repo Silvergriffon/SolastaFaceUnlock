@@ -248,20 +248,21 @@ namespace SolastaFaceUnlock
             face_to_unlock56.SetPlayerSelectable(true);
 
             MorphotypeElementDefinition skin_to_unlock = DatabaseHelper.MorphotypeElementDefinitions.FaceAndSkin_Defiler;
-            skin_to_unlock.SetOriginAllowed(all_origins);
+			//skin_to_unlock.SetOriginAllowed(all_origins);
             skin_to_unlock.SetPlayerSelectable(true);
 
             MorphotypeElementDefinition eyes_to_unlock = DatabaseHelper.MorphotypeElementDefinitions.EyeColorDefiler;
             MorphotypeElementDefinition eyes_to_unlock2 = DatabaseHelper.MorphotypeElementDefinitions.EyeColorInfiltrator;
             MorphotypeElementDefinition eyes_to_unlock3 = DatabaseHelper.MorphotypeElementDefinitions.EyeColorNecromancer;
-            eyes_to_unlock.SetOriginAllowed(all_origins);
-            eyes_to_unlock2.SetOriginAllowed(all_origins);
-            eyes_to_unlock3.SetOriginAllowed(all_origins);
+			//eyes_to_unlock.SetOriginAllowed(all_origins);
+            //eyes_to_unlock2.SetOriginAllowed(all_origins);
+            //eyes_to_unlock3.SetOriginAllowed(all_origins);
             eyes_to_unlock.SetPlayerSelectable(true);
             eyes_to_unlock2.SetPlayerSelectable(true);
             eyes_to_unlock3.SetPlayerSelectable(true);
 
-            MorphotypeElementDefinition draconic_skin = DatabaseHelper.MorphotypeElementDefinitions.BodyDecoration_SorcererDraconic;
+            //If these still don't stick on subclass select, maybe set bodydecorationtype to 2, like scars
+			MorphotypeElementDefinition draconic_skin = DatabaseHelper.MorphotypeElementDefinitions.BodyDecoration_SorcererDraconic;
             draconic_skin.SetSubClassFilterMask(GraphicsDefinitions.MorphotypeSubclassFilterTag.All);
             MorphotypeElementDefinition mana_painter_skin = DatabaseHelper.MorphotypeElementDefinitions.BodyDecoration_SorcererManaPainter;
             mana_painter_skin.SetSubClassFilterMask(GraphicsDefinitions.MorphotypeSubclassFilterTag.All);
@@ -316,6 +317,7 @@ namespace SolastaFaceUnlock
             MorphotypeElementDefinition childofrift_eyes = DatabaseHelper.MorphotypeElementDefinitions.Eye_SorcererChildOfTheRift;
             childofrift_eyes.SetSubClassFilterMask(GraphicsDefinitions.MorphotypeSubclassFilterTag.All);
 
+			//Investigate HairShape_T as it seems to be unassigned to any race
 
         }
     }
