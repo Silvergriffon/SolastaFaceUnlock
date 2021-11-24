@@ -6,11 +6,14 @@ namespace SolastaFaceUnlock
     {
 
     }
-
+    
     public class Settings : UnityModManager.ModSettings
     {
-     //   public bool toggleBodyDec = false;
-     //   public bool toggleTest2 = true;
-
+        public bool UnlockNPCs = true;
+        public bool UnmarkedSorcerers = false;
+        public bool UnlockSorcerer = false;
+        public bool UnlockEyeStyles = false;
+        public bool UnlockGlowingEyes = false;
+        public bool UnlockGlowingBodyDecorations = false;
     }
 }

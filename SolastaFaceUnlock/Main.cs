@@ -3,14 +3,13 @@ using System.Diagnostics;
 using System.IO;
 using System.Reflection;
 using UnityModManagerNet;
+using ModKit;
 using SolastaModApi;
 using SolastaModApi.Extensions;
-using ModKit;
-using ModKit.Utility;
 
 namespace SolastaFaceUnlock
 {
-    public static class Main
+    public class Main
     {
         public static readonly string MOD_FOLDER = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
 
@@ -20,20 +19,23 @@ namespace SolastaFaceUnlock
         internal static void Error(string msg) => Logger?.Error(msg);
         internal static void Warning(string msg) => Logger?.Warning(msg);
         internal static UnityModManager.ModEntry.ModLogger Logger { get; private set; }
-        internal static ModManager<Core, Settings> Mod { get; private set; }
-        internal static MenuManager Menu { get; private set; }
+        internal static ModManager<Core, Settings> Mod;
+        internal static MenuManager Menu;
         internal static Settings Settings { get { return Mod.Settings; } }
 
         internal static bool Load(UnityModManager.ModEntry modEntry)
         {
             try
             {
+                var assembly = Assembly.GetExecutingAssembly();
+
                 Logger = modEntry.Logger;
-
                 Mod = new ModManager<Core, Settings>();
-                Menu = new MenuManager();
-                modEntry.OnToggle = OnToggle;
+                Mod.Enable(modEntry, assembly);
 
+                Menu = new MenuManager();
+                Menu.Enable(modEntry, assembly);
+                
                 Translations.Load(MOD_FOLDER);
             }
             catch (Exception ex)
@@ -45,280 +47,87 @@ namespace SolastaFaceUnlock
             return true;
         }
 
-        static bool OnToggle(UnityModManager.ModEntry modEntry, bool enabled)
-        {
-            if (enabled)
-            {
-                Assembly assembly = Assembly.GetExecutingAssembly();
-                Mod.Enable(modEntry, assembly);
-                Menu.Enable(modEntry, assembly);
-            }
-            else
-            {
-                Menu.Disable(modEntry);
-                Mod.Disable(modEntry, false);
-                ReflectionCache.Clear();
-            }
-            return true;
-        }
+        internal static void OnGameReady()
+		{
+			MorphotypeElementDefinition unlock_defiler_skin = DatabaseHelper.MorphotypeElementDefinitions.FaceAndSkin_Defiler;
+			unlock_defiler_skin.SetPlayerSelectable(true);
+			MorphotypeElementDefinition unlock_neutral_skin = DatabaseHelper.MorphotypeElementDefinitions.FaceAndSkin_Neutral;
+			unlock_neutral_skin.SetPlayerSelectable(true);
 
-    internal static void OnGameReady()
-        {
-            string[] originallowed = new string[] { "Origin_NonHuman" };
-            string[] humanorigin = new string[] { "Origin_CA", "Origin_AS", "Origin_AF" };
-            string[] all_origins = new string[] { "Origin_NonHuman", "Origin_CA", "Origin_AS", "Origin_AF" };
-            MorphotypeElementDefinition face_to_unlock = DatabaseHelper.MorphotypeElementDefinitions.FaceShape_NPC_Priest_of_Arun;
-            MorphotypeElementDefinition face_to_unlock2 = DatabaseHelper.MorphotypeElementDefinitions.FaceShape_NPC_Ceannard;
-            MorphotypeElementDefinition face_to_unlock3 = DatabaseHelper.MorphotypeElementDefinitions.FaceShape_NPC_Galar_Goldentongue;
-            MorphotypeElementDefinition face_to_unlock4 = DatabaseHelper.MorphotypeElementDefinitions.FaceShape_NPC_Gromnir_Stonefist;
-            MorphotypeElementDefinition face_to_unlock5 = DatabaseHelper.MorphotypeElementDefinitions.FaceShape_NPC_Joris_Nikannen;
-            MorphotypeElementDefinition face_to_unlock6 = DatabaseHelper.MorphotypeElementDefinitions.FaceShape_NPC_Beryl_Stonebeard;
-            MorphotypeElementDefinition face_to_unlock7 = DatabaseHelper.MorphotypeElementDefinitions.FaceShape_NPC_Gormdottir;
-            MorphotypeElementDefinition face_to_unlock8 = DatabaseHelper.MorphotypeElementDefinitions.FaceShape_NPC_Gorim_Ironsoot;
-            MorphotypeElementDefinition face_to_unlock9 = DatabaseHelper.MorphotypeElementDefinitions.FaceShape_NPC_Daliat_Sunbird;
-            MorphotypeElementDefinition face_to_unlock10 = DatabaseHelper.MorphotypeElementDefinitions.FaceShape_NPC_Ilastar_Keenmind_Airgetine;
-            MorphotypeElementDefinition face_to_unlock11 = DatabaseHelper.MorphotypeElementDefinitions.FaceShape_NPC_Iolair_Faisech;
-            MorphotypeElementDefinition face_to_unlock12 = DatabaseHelper.MorphotypeElementDefinitions.FaceShape_NPC_Llygath_Steelmind;
-            MorphotypeElementDefinition face_to_unlock13 = DatabaseHelper.MorphotypeElementDefinitions.FaceShape_NPC_Mardracht;
-            MorphotypeElementDefinition face_to_unlock14 = DatabaseHelper.MorphotypeElementDefinitions.FaceShape_NPC_Medwal_Strongfire;
-            MorphotypeElementDefinition face_to_unlock15 = DatabaseHelper.MorphotypeElementDefinitions.FaceShape_NPC_Ceiwad_Silverflower;
-            MorphotypeElementDefinition face_to_unlock16 = DatabaseHelper.MorphotypeElementDefinitions.FaceShape_NPC_Adrasteia_Epimeles_Aspis;
-            MorphotypeElementDefinition face_to_unlock17 = DatabaseHelper.MorphotypeElementDefinitions.FaceShape_NPC_Idriel_Fair_Brow;
-            MorphotypeElementDefinition face_to_unlock18 = DatabaseHelper.MorphotypeElementDefinitions.FaceShape_NPC_Joriel_Fox_Eye;
-            MorphotypeElementDefinition face_to_unlock19 = DatabaseHelper.MorphotypeElementDefinitions.FaceShape_NPC_Kiaradth_BrightSpark;
-            MorphotypeElementDefinition face_to_unlock20 = DatabaseHelper.MorphotypeElementDefinitions.FaceShape_NPC_Kythaela_Wildspring;
-            MorphotypeElementDefinition face_to_unlock21 = DatabaseHelper.MorphotypeElementDefinitions.FaceShape_NPC_Lizzaria_of_Grimhold;
-            MorphotypeElementDefinition face_to_unlock22 = DatabaseHelper.MorphotypeElementDefinitions.FaceShape_HalfElf_NPC_Edvan_Danantar;
-            MorphotypeElementDefinition face_to_unlock23 = DatabaseHelper.MorphotypeElementDefinitions.FaceShape_HalfElf_NPC_Dek;
-            MorphotypeElementDefinition face_to_unlock24 = DatabaseHelper.MorphotypeElementDefinitions.FaceShape_HalfElf_NPC_Hugo_Requer;
-            MorphotypeElementDefinition face_to_unlock25 = DatabaseHelper.MorphotypeElementDefinitions.FaceShape_HalfElf_NPC_Carran_Rightower;
-            MorphotypeElementDefinition face_to_unlock26 = DatabaseHelper.MorphotypeElementDefinitions.FaceShape_HalfElf_NPC_Karel_Martel;
-            MorphotypeElementDefinition face_to_unlock27 = DatabaseHelper.MorphotypeElementDefinitions.FaceShape_HalfElf_NPC_Zhoron;
-            MorphotypeElementDefinition face_to_unlock28 = DatabaseHelper.MorphotypeElementDefinitions.FaceShape_HalfElf_NPC_Alena;
-            MorphotypeElementDefinition face_to_unlock29 = DatabaseHelper.MorphotypeElementDefinitions.FaceShape_HalfElf_NPC_Verissa_Ironshell;
-            MorphotypeElementDefinition face_to_unlock30 = DatabaseHelper.MorphotypeElementDefinitions.FaceShape_NPC_Priest_of_Maraike;
-            MorphotypeElementDefinition face_to_unlock31 = DatabaseHelper.MorphotypeElementDefinitions.FaceShape_NPC_Wilf_Warmhearth;
-            MorphotypeElementDefinition face_to_unlock32 = DatabaseHelper.MorphotypeElementDefinitions.FaceShape_NPC_Annie_Bagmordah;
-            MorphotypeElementDefinition face_to_unlock33 = DatabaseHelper.MorphotypeElementDefinitions.FaceShape_NPC_Mildred_Warmhearth;
-            MorphotypeElementDefinition face_to_unlock34 = DatabaseHelper.MorphotypeElementDefinitions.FaceShape_NPC_Maddy_Greenisle;
-            MorphotypeElementDefinition face_to_unlock35 = DatabaseHelper.MorphotypeElementDefinitions.FaceShape_NPC_Beric_Sunblaze;
-            MorphotypeElementDefinition face_to_unlock36 = DatabaseHelper.MorphotypeElementDefinitions.FaceShape_NPC_Robar_Sharp;
-            MorphotypeElementDefinition face_to_unlock37 = DatabaseHelper.MorphotypeElementDefinitions.FaceShape_NPC_Dalon_Lark;
-            MorphotypeElementDefinition face_to_unlock38 = DatabaseHelper.MorphotypeElementDefinitions.FaceShape_NPC_Halman_Summer;
-            MorphotypeElementDefinition face_to_unlock39 = DatabaseHelper.MorphotypeElementDefinitions.FaceShape_NPC_Arwin_Merton;
-            MorphotypeElementDefinition face_to_unlock40 = DatabaseHelper.MorphotypeElementDefinitions.FaceShape_NPC_Morden_Kyre;
-            MorphotypeElementDefinition face_to_unlock41 = DatabaseHelper.MorphotypeElementDefinitions.FaceShape_NPC_Razan_Holarant;
-            MorphotypeElementDefinition face_to_unlock42 = DatabaseHelper.MorphotypeElementDefinitions.FaceShape_NPC_Talbut_the_Grey;
-            MorphotypeElementDefinition face_to_unlock43 = DatabaseHelper.MorphotypeElementDefinitions.FaceShape_NPC_Ron;
-//            MorphotypeElementDefinition face_to_unlock44 = DatabaseHelper.MorphotypeElementDefinitions.FaceShape_NPC_Aksha;
-            MorphotypeElementDefinition face_to_unlock45 = DatabaseHelper.MorphotypeElementDefinitions.FaceShape_NPC_Morgan;
-            MorphotypeElementDefinition face_to_unlock46 = DatabaseHelper.MorphotypeElementDefinitions.FaceShape_NPC_Leira_Kean;
-            MorphotypeElementDefinition face_to_unlock47 = DatabaseHelper.MorphotypeElementDefinitions.FaceShape_NPC_Lena;
-            MorphotypeElementDefinition face_to_unlock48 = DatabaseHelper.MorphotypeElementDefinitions.FaceShape_NPC_Heather_Merran;
-            MorphotypeElementDefinition face_to_unlock49 = DatabaseHelper.MorphotypeElementDefinitions.FaceShape_NPC_Atima_Bladeburn;
-            MorphotypeElementDefinition face_to_unlock50 = DatabaseHelper.MorphotypeElementDefinitions.FaceShape_NPC_Lisbath_Townsend;
-            MorphotypeElementDefinition face_to_unlock51 = DatabaseHelper.MorphotypeElementDefinitions.FaceShape_NPC_Priestess_of_Pakri;
-            face_to_unlock.SetOriginAllowed(originallowed);
-            face_to_unlock2.SetOriginAllowed(originallowed);
-            face_to_unlock3.SetOriginAllowed(originallowed);
-            face_to_unlock4.SetOriginAllowed(originallowed);
-            face_to_unlock5.SetOriginAllowed(originallowed);
-            face_to_unlock6.SetOriginAllowed(originallowed);
-            face_to_unlock7.SetOriginAllowed(originallowed);
-            face_to_unlock8.SetOriginAllowed(originallowed);
-            face_to_unlock9.SetOriginAllowed(originallowed);
-            face_to_unlock10.SetOriginAllowed(originallowed);
-            face_to_unlock11.SetOriginAllowed(originallowed);
-            face_to_unlock12.SetOriginAllowed(originallowed);
-            face_to_unlock13.SetOriginAllowed(originallowed);
-            face_to_unlock14.SetOriginAllowed(originallowed);
-            face_to_unlock15.SetOriginAllowed(originallowed);
-            face_to_unlock16.SetOriginAllowed(originallowed);
-            face_to_unlock17.SetOriginAllowed(originallowed);
-            face_to_unlock18.SetOriginAllowed(originallowed);
-            face_to_unlock19.SetOriginAllowed(originallowed);
-            face_to_unlock20.SetOriginAllowed(originallowed);
-            face_to_unlock21.SetOriginAllowed(originallowed);
-            face_to_unlock22.SetOriginAllowed(originallowed);
-            face_to_unlock23.SetOriginAllowed(originallowed);
-            face_to_unlock24.SetOriginAllowed(originallowed);
-            face_to_unlock25.SetOriginAllowed(originallowed);
-            face_to_unlock26.SetOriginAllowed(originallowed);
-            face_to_unlock27.SetOriginAllowed(originallowed);
-            face_to_unlock28.SetOriginAllowed(originallowed);
-            face_to_unlock29.SetOriginAllowed(originallowed);
-            face_to_unlock30.SetOriginAllowed(originallowed);
-            face_to_unlock31.SetOriginAllowed(originallowed);
-            face_to_unlock32.SetOriginAllowed(originallowed);
-            face_to_unlock33.SetOriginAllowed(originallowed);
-            face_to_unlock34.SetOriginAllowed(originallowed);
-            face_to_unlock35.SetOriginAllowed(humanorigin);
-            face_to_unlock36.SetOriginAllowed(humanorigin);
-            face_to_unlock37.SetOriginAllowed(humanorigin);
-            face_to_unlock38.SetOriginAllowed(humanorigin);
-            face_to_unlock39.SetOriginAllowed(humanorigin);
-            face_to_unlock40.SetOriginAllowed(humanorigin);
-            face_to_unlock41.SetOriginAllowed(humanorigin);
-            face_to_unlock42.SetOriginAllowed(humanorigin);
-            face_to_unlock43.SetOriginAllowed(humanorigin);
-//            face_to_unlock44.SetOriginAllowed(humanorigin);
-            face_to_unlock45.SetOriginAllowed(humanorigin);
-            face_to_unlock46.SetOriginAllowed(humanorigin);
-            face_to_unlock47.SetOriginAllowed(humanorigin);
-            face_to_unlock48.SetOriginAllowed(humanorigin);
-            face_to_unlock49.SetOriginAllowed(humanorigin);
-            face_to_unlock50.SetOriginAllowed(humanorigin);
-            face_to_unlock51.SetOriginAllowed(humanorigin);
-            face_to_unlock.SetPlayerSelectable(true);
-            face_to_unlock2.SetPlayerSelectable(true);
-            face_to_unlock3.SetPlayerSelectable(true);
-            face_to_unlock4.SetPlayerSelectable(true);
-            face_to_unlock5.SetPlayerSelectable(true);
-            face_to_unlock6.SetPlayerSelectable(true);
-            face_to_unlock7.SetPlayerSelectable(true);
-            face_to_unlock8.SetPlayerSelectable(true);
-            face_to_unlock9.SetPlayerSelectable(true);
-            face_to_unlock10.SetPlayerSelectable(true);
-            face_to_unlock11.SetPlayerSelectable(true);
-            face_to_unlock12.SetPlayerSelectable(true);
-            face_to_unlock13.SetPlayerSelectable(true);
-            face_to_unlock14.SetPlayerSelectable(true);
-            face_to_unlock15.SetPlayerSelectable(true);
-            face_to_unlock16.SetPlayerSelectable(true);
-//            face_to_unlock17.SetPlayerSelectable(true) - causes failure to load into game
-            face_to_unlock18.SetPlayerSelectable(true);
-            face_to_unlock19.SetPlayerSelectable(true);
-            face_to_unlock20.SetPlayerSelectable(true);
-            face_to_unlock21.SetPlayerSelectable(true);
-            face_to_unlock22.SetPlayerSelectable(true);
-            face_to_unlock23.SetPlayerSelectable(true);
-            face_to_unlock24.SetPlayerSelectable(true);
-            face_to_unlock25.SetPlayerSelectable(true);
-            face_to_unlock26.SetPlayerSelectable(true);
-            face_to_unlock27.SetPlayerSelectable(true);
-            face_to_unlock28.SetPlayerSelectable(true);
-            face_to_unlock29.SetPlayerSelectable(true);
-            face_to_unlock30.SetPlayerSelectable(true);
-            face_to_unlock31.SetPlayerSelectable(true);
-            face_to_unlock32.SetPlayerSelectable(true);
-            face_to_unlock33.SetPlayerSelectable(true);
-            face_to_unlock34.SetPlayerSelectable(true);
-            face_to_unlock35.SetPlayerSelectable(true);
-            face_to_unlock36.SetPlayerSelectable(true);
-            face_to_unlock37.SetPlayerSelectable(true);
-            face_to_unlock38.SetPlayerSelectable(true);
-            face_to_unlock39.SetPlayerSelectable(true);
-            face_to_unlock40.SetPlayerSelectable(true);
-            face_to_unlock41.SetPlayerSelectable(true);
-            face_to_unlock42.SetPlayerSelectable(true);
-            face_to_unlock43.SetPlayerSelectable(true);
-//            face_to_unlock44.SetPlayerSelectable(true); - causes model to float and replaces attack animations
-            face_to_unlock45.SetPlayerSelectable(true);
-            face_to_unlock46.SetPlayerSelectable(true);
-            face_to_unlock47.SetPlayerSelectable(true);
-            face_to_unlock48.SetPlayerSelectable(true);
-            face_to_unlock49.SetPlayerSelectable(true);
-            face_to_unlock50.SetPlayerSelectable(true);
-            face_to_unlock51.SetPlayerSelectable(true);
+			if (Main.Settings.UnmarkedSorcerers)
+			{
+				CharacterSubclassDefinition sorcerer_draconic = DatabaseHelper.CharacterSubclassDefinitions.SorcerousDraconicBloodline;
+				CharacterSubclassDefinition sorcerer_mana_painter = DatabaseHelper.CharacterSubclassDefinitions.SorcerousManaPainter;
+				CharacterSubclassDefinition sorcerer_child_of_rift = DatabaseHelper.CharacterSubclassDefinitions.SorcerousChildRift;
 
-            CharacterRaceDefinition humanity = DatabaseHelper.CharacterRaceDefinitions.Human;
-            CharacterRaceDefinition halfelfkind = DatabaseHelper.CharacterRaceDefinitions.HalfElf;
-            CharacterRaceDefinition dwarfkind = DatabaseHelper.CharacterRaceDefinitions.Dwarf;
-            CharacterRaceDefinition halflingses = DatabaseHelper.CharacterRaceDefinitions.Halfling;
-            CharacterRaceDefinition elfkind = DatabaseHelper.CharacterRaceDefinitions.Elf;
-            halfelfkind.RacePresentation.MaleFaceShapeOptions.Add("FaceShape_HalfElf_NPC_Bartender");
-            humanity.RacePresentation.FemaleFaceShapeOptions.Add("FaceShape_NPC_Heather_Merran");
-            halfelfkind.RacePresentation.FemaleFaceShapeOptions.Add("FaceShape_NPC_Princess");
-            humanity.RacePresentation.MaleFaceShapeOptions.Add("FaceShape_NPC_TavernGuy");
-            humanity.RacePresentation.MaleFaceShapeOptions.Add("FaceShape_NPC_TomWorker");
-            MorphotypeElementDefinition face_to_unlock52 = DatabaseHelper.MorphotypeElementDefinitions.FaceShape_HalfElf_NPC_Bartender;
-            MorphotypeElementDefinition face_to_unlock53 = DatabaseHelper.MorphotypeElementDefinitions.FaceShape_NPC_Heather_Merran;
-            MorphotypeElementDefinition face_to_unlock54 = DatabaseHelper.MorphotypeElementDefinitions.FaceShape_NPC_Princess;
-            MorphotypeElementDefinition face_to_unlock55 = DatabaseHelper.MorphotypeElementDefinitions.FaceShape_NPC_TavernGuy;
-            MorphotypeElementDefinition face_to_unlock56 = DatabaseHelper.MorphotypeElementDefinitions.FaceShape_NPC_TomWorker;
-            face_to_unlock52.SetOriginAllowed(originallowed);
-            face_to_unlock53.SetOriginAllowed(humanorigin);
-            face_to_unlock54.SetOriginAllowed(originallowed);
-            face_to_unlock55.SetOriginAllowed(humanorigin);
-            face_to_unlock56.SetOriginAllowed(humanorigin);
-            face_to_unlock52.SetPlayerSelectable(true);
-            face_to_unlock53.SetPlayerSelectable(true);
-            face_to_unlock54.SetPlayerSelectable(true);
-            face_to_unlock55.SetPlayerSelectable(true);
-            face_to_unlock56.SetPlayerSelectable(true);
+				sorcerer_draconic.SetMorphotypeSubclassFilterTag(GraphicsDefinitions.MorphotypeSubclassFilterTag.Default);
+				sorcerer_mana_painter.SetMorphotypeSubclassFilterTag(GraphicsDefinitions.MorphotypeSubclassFilterTag.Default);
+				sorcerer_child_of_rift.SetMorphotypeSubclassFilterTag(GraphicsDefinitions.MorphotypeSubclassFilterTag.Default);
+			}
 
-            MorphotypeElementDefinition skin_to_unlock = DatabaseHelper.MorphotypeElementDefinitions.FaceAndSkin_Defiler;
-			//skin_to_unlock.SetOriginAllowed(all_origins);
-            skin_to_unlock.SetPlayerSelectable(true);
+			if (Main.Settings.UnlockNPCs)
+			{
+				CharacterRaceDefinition humanity = DatabaseHelper.CharacterRaceDefinitions.Human;
+				CharacterRaceDefinition halfelfkind = DatabaseHelper.CharacterRaceDefinitions.HalfElf;
+				halfelfkind.RacePresentation.FemaleFaceShapeOptions.Add("FaceShape_NPC_Princess");
+				halfelfkind.RacePresentation.MaleFaceShapeOptions.Add("FaceShape_HalfElf_NPC_Bartender");
+				humanity.RacePresentation.MaleFaceShapeOptions.Add("FaceShape_NPC_TavernGuy");
+				humanity.RacePresentation.MaleFaceShapeOptions.Add("FaceShape_NPC_TomWorker");
+			}
 
-            MorphotypeElementDefinition eyes_to_unlock = DatabaseHelper.MorphotypeElementDefinitions.EyeColorDefiler;
-            MorphotypeElementDefinition eyes_to_unlock2 = DatabaseHelper.MorphotypeElementDefinitions.EyeColorInfiltrator;
-            MorphotypeElementDefinition eyes_to_unlock3 = DatabaseHelper.MorphotypeElementDefinitions.EyeColorNecromancer;
-			//eyes_to_unlock.SetOriginAllowed(all_origins);
-            //eyes_to_unlock2.SetOriginAllowed(all_origins);
-            //eyes_to_unlock3.SetOriginAllowed(all_origins);
-            eyes_to_unlock.SetPlayerSelectable(true);
-            eyes_to_unlock2.SetPlayerSelectable(true);
-            eyes_to_unlock3.SetPlayerSelectable(true);
+			foreach (MorphotypeElementDefinition morphotype in DatabaseRepository.GetDatabase<MorphotypeElementDefinition>())
+			{
+				if (Main.Settings.UnlockNPCs)
+				{
+					if (morphotype.Category == MorphotypeElementDefinition.ElementCategory.FaceShape)
+					{
+						morphotype.SetPlayerSelectable(true);
+						//In previous builds, FaceShape_NPC_Idriel_Fair_Brow caused the game to fail to load
+						//MorphotypeElementDefinition exception_Idriel_Fair_Brow = DatabaseHelper.MorphotypeElementDefinitions.FaceShape_NPC_Idriel_Fair_Brow;
+						//exception_Idriel_Fair_Brow.SetPlayerSelectable(false);
+						//FaceShape_NPC_Aksha causes the model to float and changes attack animations
+						MorphotypeElementDefinition exception_NPC_Aksha = DatabaseHelper.MorphotypeElementDefinitions.FaceShape_NPC_Aksha;
+						exception_NPC_Aksha.SetPlayerSelectable(false);
 
-            //If these still don't stick on subclass select, maybe set bodydecorationtype to 2, like scars
-			MorphotypeElementDefinition draconic_skin = DatabaseHelper.MorphotypeElementDefinitions.BodyDecoration_SorcererDraconic;
-            draconic_skin.SetSubClassFilterMask(GraphicsDefinitions.MorphotypeSubclassFilterTag.All);
-            MorphotypeElementDefinition mana_painter_skin = DatabaseHelper.MorphotypeElementDefinitions.BodyDecoration_SorcererManaPainter;
-            mana_painter_skin.SetSubClassFilterMask(GraphicsDefinitions.MorphotypeSubclassFilterTag.All);
-            MorphotypeElementDefinition child_of_rift_skin = DatabaseHelper.MorphotypeElementDefinitions.BodyDecoration_SorcererChildOfTheRift;
-            child_of_rift_skin.SetSubClassFilterMask(GraphicsDefinitions.MorphotypeSubclassFilterTag.All);
+					}
+				}
 
-            MorphotypeElementDefinition mana_painter_color_00 = DatabaseHelper.MorphotypeElementDefinitions.BodyDecorationColor_SorcererManaPainter_00;
-            mana_painter_color_00.SetSubClassFilterMask(GraphicsDefinitions.MorphotypeSubclassFilterTag.All);
-            MorphotypeElementDefinition mana_painter_color_01 = DatabaseHelper.MorphotypeElementDefinitions.BodyDecorationColor_SorcererManaPainter_01;
-            mana_painter_color_01.SetSubClassFilterMask(GraphicsDefinitions.MorphotypeSubclassFilterTag.All);
-            MorphotypeElementDefinition mana_painter_color_02 = DatabaseHelper.MorphotypeElementDefinitions.BodyDecorationColor_SorcererManaPainter_02;
-            mana_painter_color_02.SetSubClassFilterMask(GraphicsDefinitions.MorphotypeSubclassFilterTag.All);
-            MorphotypeElementDefinition mana_painter_color_03 = DatabaseHelper.MorphotypeElementDefinitions.BodyDecorationColor_SorcererManaPainter_03;
-            mana_painter_color_03.SetSubClassFilterMask(GraphicsDefinitions.MorphotypeSubclassFilterTag.All);
-            MorphotypeElementDefinition mana_painter_color_04 = DatabaseHelper.MorphotypeElementDefinitions.BodyDecorationColor_SorcererManaPainter_04;
-            mana_painter_color_04.SetSubClassFilterMask(GraphicsDefinitions.MorphotypeSubclassFilterTag.All);
-            MorphotypeElementDefinition mana_painter_color_05 = DatabaseHelper.MorphotypeElementDefinitions.BodyDecorationColor_SorcererManaPainter_05;
-            mana_painter_color_05.SetSubClassFilterMask(GraphicsDefinitions.MorphotypeSubclassFilterTag.All);
-            MorphotypeElementDefinition mana_painter_color_06 = DatabaseHelper.MorphotypeElementDefinitions.BodyDecorationColor_SorcererManaPainter_06;
-            mana_painter_color_06.SetSubClassFilterMask(GraphicsDefinitions.MorphotypeSubclassFilterTag.All);
-            MorphotypeElementDefinition mana_painter_color_07 = DatabaseHelper.MorphotypeElementDefinitions.BodyDecorationColor_SorcererManaPainter_07;
-            mana_painter_color_07.SetSubClassFilterMask(GraphicsDefinitions.MorphotypeSubclassFilterTag.All);
-            MorphotypeElementDefinition mana_painter_color_08 = DatabaseHelper.MorphotypeElementDefinitions.BodyDecorationColor_SorcererManaPainter_08;
-            mana_painter_color_08.SetSubClassFilterMask(GraphicsDefinitions.MorphotypeSubclassFilterTag.All);
-            MorphotypeElementDefinition mana_painter_color_09 = DatabaseHelper.MorphotypeElementDefinitions.BodyDecorationColor_SorcererManaPainter_09;
-            mana_painter_color_09.SetSubClassFilterMask(GraphicsDefinitions.MorphotypeSubclassFilterTag.All);
-            MorphotypeElementDefinition mana_painter_color_10 = DatabaseHelper.MorphotypeElementDefinitions.BodyDecorationColor_SorcererManaPainter_10;
-            mana_painter_color_10.SetSubClassFilterMask(GraphicsDefinitions.MorphotypeSubclassFilterTag.All);
-            MorphotypeElementDefinition mana_painter_color_11 = DatabaseHelper.MorphotypeElementDefinitions.BodyDecorationColor_SorcererManaPainter_11;
-            mana_painter_color_11.SetSubClassFilterMask(GraphicsDefinitions.MorphotypeSubclassFilterTag.All);
-            MorphotypeElementDefinition mana_painter_color_12 = DatabaseHelper.MorphotypeElementDefinitions.BodyDecorationColor_SorcererManaPainter_12;
-            mana_painter_color_12.SetSubClassFilterMask(GraphicsDefinitions.MorphotypeSubclassFilterTag.All);
-            MorphotypeElementDefinition mana_painter_color_13 = DatabaseHelper.MorphotypeElementDefinitions.BodyDecorationColor_SorcererManaPainter_13;
-            mana_painter_color_13.SetSubClassFilterMask(GraphicsDefinitions.MorphotypeSubclassFilterTag.All);
-            MorphotypeElementDefinition mana_painter_color_14 = DatabaseHelper.MorphotypeElementDefinitions.BodyDecorationColor_SorcererManaPainter_14;
-            mana_painter_color_14.SetSubClassFilterMask(GraphicsDefinitions.MorphotypeSubclassFilterTag.All);
-            MorphotypeElementDefinition mana_painter_color_15 = DatabaseHelper.MorphotypeElementDefinitions.BodyDecorationColor_SorcererManaPainter_15;
-            mana_painter_color_15.SetSubClassFilterMask(GraphicsDefinitions.MorphotypeSubclassFilterTag.All);
+				if (Main.Settings.UnlockGlowingEyes)
+				{
+					if (morphotype.Category == MorphotypeElementDefinition.ElementCategory.EyeColor)
+					{
+						morphotype.SetPlayerSelectable(true);
+					}
+				}
 
-            CharacterSubclassDefinition sorcerer_draconic = DatabaseHelper.CharacterSubclassDefinitions.SorcerousDraconicBloodline;
-            CharacterSubclassDefinition sorcerer_mana_painter = DatabaseHelper.CharacterSubclassDefinitions.SorcerousManaPainter;
-            CharacterSubclassDefinition sorcerer_child_of_rift = DatabaseHelper.CharacterSubclassDefinitions.SorcerousChildRift;
+				if (Main.Settings.UnlockEyeStyles)
+				{
+					if (morphotype.Category == MorphotypeElementDefinition.ElementCategory.Eye)
+					{
+						morphotype.SetSubClassFilterMask(GraphicsDefinitions.MorphotypeSubclassFilterTag.All);
+					}
+				}
 
-            sorcerer_draconic.SetMorphotypeSubclassFilterTag(GraphicsDefinitions.MorphotypeSubclassFilterTag.Default);
-            sorcerer_mana_painter.SetMorphotypeSubclassFilterTag(GraphicsDefinitions.MorphotypeSubclassFilterTag.Default);
-            sorcerer_child_of_rift.SetMorphotypeSubclassFilterTag(GraphicsDefinitions.MorphotypeSubclassFilterTag.Default);
+				if (Main.Settings.UnlockSorcerer)
+				{
+					if (morphotype.Category == MorphotypeElementDefinition.ElementCategory.BodyDecoration)
+					{
+						morphotype.SetSubClassFilterMask(GraphicsDefinitions.MorphotypeSubclassFilterTag.All);
+					}
+				}
 
-            MorphotypeElementDefinition draconic_eyes = DatabaseHelper.MorphotypeElementDefinitions.Eye_SorcererDraconic;
-            draconic_eyes.SetSubClassFilterMask(GraphicsDefinitions.MorphotypeSubclassFilterTag.All);
-            MorphotypeElementDefinition mana_painter_eyes = DatabaseHelper.MorphotypeElementDefinitions.Eye_SorcererManaPainter;
-            mana_painter_eyes.SetSubClassFilterMask(GraphicsDefinitions.MorphotypeSubclassFilterTag.All);
-            MorphotypeElementDefinition childofrift_eyes = DatabaseHelper.MorphotypeElementDefinitions.Eye_SorcererChildOfTheRift;
-            childofrift_eyes.SetSubClassFilterMask(GraphicsDefinitions.MorphotypeSubclassFilterTag.All);
+				if (Main.Settings.UnlockGlowingBodyDecorations)
+				{
+					if (morphotype.Category == MorphotypeElementDefinition.ElementCategory.BodyDecorationColor)
+					{
+						if (morphotype.SubclassFilterMask == GraphicsDefinitions.MorphotypeSubclassFilterTag.SorcererManaPainter)
+						{
+							morphotype.SetSubClassFilterMask(GraphicsDefinitions.MorphotypeSubclassFilterTag.All);
+						}
+					}
+				}
+			}
 
-			//Investigate HairShape_T as it seems to be unassigned to any race
-
-        }
-    }
+		}
+	}
 }
