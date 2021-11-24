@@ -1,0 +1,2 @@
+SolastaFaceUnlock/&FancySkeletonTitle	Fancy Skeleton
+SolastaFaceUnlock/&FancySkeletonDescription	I'm a fancy skeleton
