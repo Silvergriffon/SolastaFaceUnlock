@@ -1,12 +1,11 @@
 # SolastaFaceUnlock
 
-This mod unlocks the following and makes them available for character creation:
+This mod optionally unlocks the following and makes them available for character creation:
 Over 50 NPC faces
 New color options (including some that glow)
 Eye Styles
 All characters can have Sorceror body decorations and Sorcerers can opt for any (or no) body decoration
 Disclaimer: Some faces may not work with all beard shapes!
-
 
 # How to Compile
 
